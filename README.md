@@ -1,73 +1,430 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# FAM Minicurso Fullstack JS: Parte I - Backend com NestJS (30/10/2023)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Instalação Programas
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- Download: [NodeJS](https://nodejs.org/en/download)
+- Download: [VsCode](https://code.visualstudio.com/download)
+- Download: [Git](https://git-scm.com/downloads)
 
-## Description
+&nbsp;
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Instalar Nest CLI (precisa Node e NPM)
 
-## Installation
-
-```bash
-$ npm install
+```
+npm i -g @nestjs/cli
 ```
 
-## Running the app
+&nbsp;
 
-```bash
-# development
-$ npm run start
+## Configuração Inicial
 
-# watch mode
-$ npm run start:dev
+### Opção 1 - Criar novo projeto
 
-# production mode
-$ npm run start:prod
+Criar e instalar dependências:
+
+```
+nest new dev-coffee-api
 ```
 
-## Test
+Acessar a pasta e rodar projeto localmente (http://localhost:3000):
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```
+cd dev-coffee-api
+npm run start
 ```
 
-## Support
+### Opção 2 - Clonar este repositório
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+git clone https://github.com/rpaivabr/fam-devcoffee-backend.git
+cd dev-coffee-api
+npm install
+npm run start
+```
 
-## Stay in touch
+&nbsp;
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Etapa 1
 
-## License
+### Criando recursos (Rest / CRUD)
 
-Nest is [MIT licensed](LICENSE).
+Vscode Ext Rest (ThunderClient):
+
+```
+POST    /products
+GET     /products
+GET     /products/:id
+PUT     /products/:id
+DELETE  /products/:id
+
+POST    /orders
+GET     /orders
+GET     /orders/:id
+PATCH   /orders/:id
+```
+
+Criar recursos (products - orders):
+
+```
+nest g resource
+```
+
+Exemplos de produtos
+
+```
+// products.ts
+export const products: Product[] = [
+  {
+    id: 1,
+    name: 'Expresso Tradicional',
+    description: 'O tradicional café feito com água quente e grãos moídos',
+    price: 9.9,
+    tags: ['Tradicional'],
+  },
+  {
+    id: 2,
+    name: 'Expresso Americano',
+    description: 'Expresso diluído, menos intenso que o tradicional',
+    price: 9.9,
+    tags: ['Tradicional'],
+  },
+  {
+    id: 3,
+    name: 'Expresso Cremoso',
+    description: 'Café expresso tradicional com espuma cremosa',
+    price: 9.9,
+    tags: ['Tradicional'],
+  },
+  {
+    id: 4,
+    name: 'Expresso Gelado',
+    description: 'Bebida preparada com café expresso e cubos de gelo',
+    price: 9.9,
+    tags: ['Tradicional', 'Gelado'],
+  },
+  {
+    id: 5,
+    name: 'Café com Leite',
+    description: 'Meio a meio de expresso tradicional com leite vaporizado',
+    price: 9.9,
+    tags: ['Tradicional', 'Com leite'],
+  },
+];
+```
+
+- Documentação: [recipes/crud-generator](https://docs.nestjs.com/recipes/crud-generator)
+
+&nbsp;
+
+## Etapa 2
+
+### Criando serviço repositório (Database / ORM)
+
+Instalar e configurar TypeORM dependências:
+
+```
+npm install --save @nestjs/typeorm typeorm
+```
+
+### Opção 1 - Sqlite
+
+```
+npm install --save sqlite3
+```
+
+```
+// app.module.ts
+@Module({
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: ':memory:',
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
+  ]
+})
+```
+
+```
+// products.module.ts
+@Module({
+  imports: [TypeOrmModule.forFeature([Product])],
+})
+```
+
+```
+// product.entity.ts
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
+@Entity()
+export class Product {
+  @PrimaryGeneratedColumn()
+  id: string;
+
+  @Column()
+  name: string;
+
+  @Column()
+  description: string;
+
+  @Column()
+  price: number;
+}
+```
+
+```
+// products.service.ts
+@Injectable()
+export class ProductsService {
+  constructor(
+    @InjectRepository(Product)
+    private readonly productsRepository: Repository<Product>,
+  ) {}
+}
+```
+
+### Opção 2 - MySQL
+
+```
+npm install --save mysql2
+```
+
+```
+// app.module.ts
+@Module({
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: '127.0.0.1',
+      port: 3306,
+      username: 'root',
+      password: 'root',
+      database: 'test',
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
+  ]
+})
+```
+
+### Opção 3 - Mongo
+
+```
+npm install --save mysql2
+```
+
+```
+// app.module.ts
+@Module({
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mongodb',
+      host: 'localhost',
+      database: 'test',
+      entities: [Products],
+      synchronize: true,
+    }),
+  ]
+})
+```
+
+```
+// product.entity.ts
+import { Column, Entity, ObjectId, ObjectIdColumn } from 'typeorm';
+
+@Entity()
+export class Product {
+
+  @ObjectIdColumn()
+  id: ObjectId;
+}
+```
+
+```
+// products.service.ts
+import { MongoRepository } from 'typeorm';
+import { ObjectId } from 'mongodb';
+
+@Injectable()
+export class ProductsService {
+  constructor(
+    @InjectRepository(Product)
+    private productsRepository: MongoRepository<Product>,
+  ) {}
+}
+```
+
+- Documentação: [recipes/sql-typeorm](https://docs.nestjs.com/recipes/sql-typeorm)
+- Exemplos: [05-sql-typeorm](https://github.com/nestjs/nest/tree/master/sample/05-sql-typeorm) | [13-mongo-typeorm](https://github.com/nestjs/nest/tree/master/sample/13-mongo-typeorm)
+
+&nbsp;
+
+## Etapa 3 (Extra)
+
+### Interceptors
+
+Error Interceptor
+
+```
+// exception.interceptor.ts
+import {
+  BadRequestException,
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor,
+  NotFoundException,
+} from '@nestjs/common';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { EntityNotFoundError } from 'typeorm';
+
+@Injectable()
+export class ExceptionInterceptor implements NestInterceptor {
+  intercept(_context: ExecutionContext, next: CallHandler): Observable<any> {
+    return next.handle().pipe(
+      catchError((err) => {
+        if (err instanceof EntityNotFoundError) {
+          return throwError(() => new NotFoundException());
+        }
+        if (
+          err.message ===
+          'Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer'
+        ) {
+          return throwError(() => new BadRequestException('Invalid Id'));
+        }
+        return throwError(() => err);
+      }),
+    );
+  }
+}
+```
+
+Logging Interceptor
+
+```
+// logging.interceptor.ts
+import {
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor,
+} from '@nestjs/common';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+@Injectable()
+export class LoggingInterceptor implements NestInterceptor {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    console.log('Before...');
+
+    const now = Date.now();
+    return next
+      .handle()
+      .pipe(tap(() => console.log(`After... ${Date.now() - now}ms`)));
+  }
+}
+```
+
+Transform Interceptor
+
+```
+// transform.interceptor.ts
+import {
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor,
+} from '@nestjs/common';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+export interface Response<T> {
+  data: T;
+}
+
+@Injectable()
+export class TransformInterceptor<T>
+  implements NestInterceptor<T, Response<T>>
+{
+  intercept(
+    context: ExecutionContext,
+    next: CallHandler<T>,
+  ): Observable<Response<T>> {
+    return next.handle().pipe(map((data) => ({ data })));
+  }
+}
+```
+
+- Documentação: [overview/interceptors](https://docs.nestjs.com/interceptors)
+
+### Performance
+
+Fastify
+
+```
+npm i --save @nestjs/platform-fastify
+```
+
+```
+// main.ts
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
+
+async function bootstrap() {
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter(),
+  );
+  await app.listen(3000, 'localhost');
+  console.log(`Application is running on: ${await app.getUrl()}`);
+}
+bootstrap();
+```
+
+- Documentação: [techniques/performance](https://docs.nestjs.com/techniques/performance)
+- Exemplos: [fastify](https://github.com/nestjs/nest/tree/master/sample/10-fastify)
+
+### Documentação
+
+Swagger
+
+```
+npm install --save @nestjs/swagger
+```
+
+```
+// main.ts
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  const config = new DocumentBuilder()
+    .setTitle('DevCoffee example')
+    .setDescription('The DevCoffee API description')
+    .setVersion('1.0')
+    .addTag('devcoffee')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
+  await app.listen(3000);
+}
+bootstrap();
+```
+
+```
+// products.controller.ts
+@ApiTags('products')
+@Controller('products')
+export class ProductsController {}
+```
+
+- Documentação: [recipes/swagger](https://docs.nestjs.com/openapi/introduction)
+- Exemplos: [11-swagger](https://github.com/nestjs/nest/tree/master/sample/11-swagger)
+
+&nbsp;
