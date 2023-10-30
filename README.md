@@ -1,5 +1,7 @@
 # FAM Minicurso Fullstack JS: Parte I - Backend com NestJS (30/10/2023)
 
+![Imgur Image](http://i.imgur.com/gDdh7YT.jpg)
+
 ## Instalação Programas
 
 - Download: [NodeJS](https://nodejs.org/en/download)
@@ -36,7 +38,7 @@ npm run start
 ### Opção 2 - Clonar este repositório
 
 ```
-git clone https://github.com/rpaivabr/fam-devcoffee-backend.git
+git clone https://github.com/rpaivabr/fam-devcoffee-backend.git dev-coffee-api
 cd dev-coffee-api
 npm install
 npm run start
